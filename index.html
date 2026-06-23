@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ECHR Counsel Selector</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="ECHR Counsel Selector">
+        <header class="topbar">
+          <div>
+            <p class="kicker">Кейс 4 / ЕСПЧ</p>
+            <h1>ECHR Counsel Selector</h1>
+          </div>
+          <div class="decision-card">
+            <span>Первый кандидат</span>
+            <strong id="leaderName">Doughty Street Chambers</strong>
+            <small id="leaderScore">89 / 100</small>
+          </div>
+        </header>
+
+        <div class="disclaimer">
+          Прототип предназначен только для первичного сравнения консультантов. Перед выбором нужны fresh check Chambers / Legal 500, conflict check, санкционный и AML/KYC-скрининг, письменный fee quote, проверка доступности команды и независимое юридическое решение по стратегии ЕСПЧ.
+        </div>
+
+        <div class="content-grid">
+          <aside class="control-panel" aria-label="Настройки сравнения">
+            <div class="panel-head">
+              <h2>Модель отбора</h2>
+              <button id="resetButton" type="button">Сбросить</button>
+            </div>
+
+            <div id="sliders" class="sliders"></div>
+
+            <div class="filter-block">
+              <label for="budgetCap">Потолок ставки, EUR/час</label>
+              <div class="budget-value"><span id="budgetValue">900</span></div>
+              <input id="budgetCap" type="range" min="250" max="1200" step="50" value="900" />
+            </div>
+
+            <div class="checks" aria-label="Ограничения оплаты и конфликта">
+              <label><input id="requireRankings" type="checkbox" checked /> Chambers / Legal 500</label>
+              <label><input id="requireWire" type="checkbox" /> Банковский перевод без РФ</label>
+              <label><input id="requireSanctions" type="checkbox" /> Санкционный конфликт низкий</label>
+            </div>
+          </aside>
+
+          <section class="main-panel" aria-label="Сравнение консультантов">
+            <div class="main-head">
+              <div>
+                <h2>Матрица консультантов</h2>
+                <p>Любую ячейку можно редактировать. Экспорт сохранит текущий вид таблицы.</p>
+              </div>
+              <div class="table-actions">
+                <button id="exportPdfButton" type="button">PDF</button>
+                <button id="exportExcelButton" type="button">Excel</button>
+                <button id="addColumnButton" type="button">Добавить</button>
+              </div>
+            </div>
+
+            <div class="score-strip" id="scoreStrip"></div>
+
+            <div class="matrix-wrap">
+              <table class="matrix" id="comparisonTable"></table>
+            </div>
+          </section>
+
+          <aside class="add-panel" aria-label="Новый консультант">
+            <h2>Новая колонка</h2>
+            <div class="import-box">
+              <label for="consultantUrl">
+                Ссылка на консультанта
+                <input id="consultantUrl" type="url" placeholder="https://..." />
+              </label>
+              <button id="aiImportButton" type="button">ИИ-заполнить из ссылки</button>
+              <p id="importStatus" class="import-status">Можно вставить сайт фирмы или профиль партнера.</p>
+            </div>
+            <form id="consultantForm">
+              <label>
+                Название
+                <input id="newName" type="text" value="Boutique PIL team" />
+              </label>
+              <label>
+                Ведущий партнер
+                <input id="newPartner" type="text" value="Lead counsel TBD" />
+              </label>
+              <label>
+                Ссылка на партнера
+                <input id="newPartnerUrl" type="url" value="" placeholder="https://..." />
+              </label>
+              <label>
+                Юрисдикция
+                <input id="newJurisdiction" type="text" value="EU / UK" />
+              </label>
+              <label>
+                Ориентир ставки, EUR/час
+                <input id="newRate" type="number" min="100" max="2500" step="50" value="550" />
+              </label>
+              <label>
+                Оплата
+                <select id="newPayment">
+                  <option value="EU invoice, bank wire">EU invoice, bank wire</option>
+                  <option value="UK invoice, GBP/EUR wire">UK invoice, GBP/EUR wire</option>
+                  <option value="Retainer via third-country entity">Retainer via third-country entity</option>
+                  <option value="Needs manual KYC check">Needs manual KYC check</option>
+                </select>
+              </label>
+              <div class="mini-grid">
+                <label>
+                  ЕСПЧ
+                  <input id="newEchr" type="number" min="0" max="100" value="70" />
+                </label>
+                <label>
+                  Рейтинги
+                  <input id="newRank" type="number" min="0" max="100" value="60" />
+                </label>
+                <label>
+                  Цена
+                  <input id="newValue" type="number" min="0" max="100" value="76" />
+                </label>
+                <label>
+                  Оплата
+                  <input id="newPay" type="number" min="0" max="100" value="72" />
+                </label>
+              </div>
+              <button type="submit">Добавить</button>
+            </form>
+            <p class="note">Перед реальным наймом нужны conflict check, свежие профили Chambers / Legal 500 и письменный fee quote.</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
